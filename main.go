@@ -3,6 +3,8 @@ package main
 import (
 	"flag"
 
+	"github.com/joho/godotenv"
+
 	"github.com/speier/hrun/pkg/req"
 	"github.com/speier/hrun/pkg/utils"
 	"github.com/speier/hrun/pkg/vm"
@@ -14,6 +16,7 @@ var (
 )
 
 func init() {
+	godotenv.Load()
 	flag.StringVar(&filename, "f", "", "filename")
 	flag.Var(&params, "s", "params")
 	flag.Parse()
