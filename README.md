@@ -4,13 +4,13 @@ HTTP request runner with a simple DSL based on JavaScript.
 
 ## Install
 
-Install using GoBinaries:
+Download the [latest release](https://github.com/speier/hrun/releases)
+
+or install using GoBinaries:
 
 ```sh
-curl -sf https://gobinaries.com/speier/hrun | sh
+$ curl -sf https://gobinaries.com/speier/hrun | sh
 ```
-
-or download the [latest release](https://github.com/speier/hrun/releases).
 
 ## Usage example
 
