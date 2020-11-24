@@ -1,6 +1,7 @@
-package main
+package vm
 
 import (
+	"fmt"
 	"io/ioutil"
 	"reflect"
 
@@ -21,6 +22,11 @@ type gojaInterpreter struct {
 func NewInterpreter(globals map[string]interface{}) VM {
 	runtime := goja.New()
 	runtime.SetFieldNameMapper(&jsonTagNamer{})
+
+	// default globals
+	runtime.Set("console", map[string]interface{}{
+		"log": fmt.Println,
+	})
 
 	if globals != nil {
 		for name, value := range globals {
