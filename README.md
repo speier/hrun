@@ -52,7 +52,7 @@ The following flags are available:
 For example:
 
 ```sh
-$ hrun -e=1 e=2 foo.js
+$ hrun -e=1 -e=2 -e bar.env foo.js
 ```
 
 Flag `-e` is repeatable and can be key=value or a filename to load env vars, will be available on `env` object from the scripts.
