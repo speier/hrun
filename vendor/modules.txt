@@ -1,0 +1,42 @@
+# github.com/GeertJohan/go.rice v0.0.0-20170420135705-c02ca9a983da
+github.com/GeertJohan/go.rice
+github.com/GeertJohan/go.rice/embedded
+# github.com/daaku/go.zipexe v0.0.0-20150329023125-a5fe2436ffcb
+github.com/daaku/go.zipexe
+# github.com/dlclark/regexp2 v1.4.0
+## explicit
+github.com/dlclark/regexp2
+github.com/dlclark/regexp2/syntax
+# github.com/dop251/goja v0.0.0-20201107160812-7545ac6de48a
+## explicit
+github.com/dop251/goja
+github.com/dop251/goja/ast
+github.com/dop251/goja/file
+github.com/dop251/goja/ftoa
+github.com/dop251/goja/ftoa/internal/fast
+github.com/dop251/goja/parser
+github.com/dop251/goja/token
+github.com/dop251/goja/unistring
+# github.com/go-sourcemap/sourcemap v2.1.3+incompatible
+## explicit
+github.com/go-sourcemap/sourcemap
+github.com/go-sourcemap/sourcemap/internal/base64vlq
+# github.com/kardianos/osext v0.0.0-20170510131534-ae77be60afb1
+github.com/kardianos/osext
+# github.com/speier/gowasm v0.0.0-20181207125641-bfb154601c86
+## explicit
+github.com/speier/gowasm/pkg/babel
+# golang.org/x/text v0.3.4
+## explicit
+golang.org/x/text/cases
+golang.org/x/text/collate
+golang.org/x/text/internal
+golang.org/x/text/internal/colltab
+golang.org/x/text/internal/language
+golang.org/x/text/internal/language/compact
+golang.org/x/text/internal/tag
+golang.org/x/text/language
+golang.org/x/text/transform
+golang.org/x/text/unicode/norm
+# gopkg.in/yaml.v2 v2.3.0
+## explicit

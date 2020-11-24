@@ -1,0 +1,8 @@
+build:
+  binary: hrun
+  goos:
+    - linux
+    - darwin
+    - windows
+  goarch:
+    - amd64
