@@ -47,17 +47,15 @@ METHOD(URL, [headers], [payload])
 
 The following flags are available:
 
-`-f`: filename
-
-`-s`: set param
+`-e`: set env var, key=value or filename (repeatable)
 
 For example:
 
 ```sh
-$ hrun -f foo.js -s a=1 b=2
+$ hrun -e=1 e=2 foo.js
 ```
 
-Filename `-f` is required, `-s` is optional to set key value params, these params alongside the host environment variables will be available for the script on the `env` object.
+Flag `-e` is repeatable and can be key=value or a filename to load env vars, will be available on `env` object from the scripts.
 
 ## License
 
