@@ -42,3 +42,23 @@ METHOD(URL, [headers], [payload])
 `[headers]`: optional
 
 `[payload]`: optional
+
+## CLI
+
+The following flags are available:
+
+`-f`: filename
+
+`-s`: set param
+
+For example:
+
+```sh
+$ hrun -f foo.js -s a=1 b=2
+```
+
+Filename `-f` is required, `-s` is optional to set key value params, these params alongside the host environment variables will be available for the script on the `env` object.
+
+## License
+
+[MIT](LICENSE)
