@@ -3,32 +3,27 @@ package main
 import (
 	"flag"
 
-	"github.com/joho/godotenv"
-
 	"github.com/speier/hrun/pkg/req"
 	"github.com/speier/hrun/pkg/utils"
 	"github.com/speier/hrun/pkg/vm"
 )
 
 var (
-	filename string
-	params   utils.ArrayFlag
+	envargs utils.ArrayFlag
 )
 
 func init() {
-	godotenv.Load()
-	flag.StringVar(&filename, "f", "", "filename")
-	flag.Var(&params, "s", "params")
+	flag.Var(&envargs, "e", "env var or file (repeatable)")
 	flag.Parse()
 }
 
 func main() {
 	// init vm
 	vm := vm.NewInterpreter(req.Methods)
-	vm.Set("env", utils.VMEnv(params))
+	vm.Set("env", utils.VMEnv(envargs))
 
 	// run script
-	_, err := vm.RunFile(filename)
+	_, err := vm.RunFile(flag.Arg(0))
 	if err != nil {
 		println(err.Error())
 	}
