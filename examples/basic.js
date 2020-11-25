@@ -7,4 +7,4 @@ GET(`${host}/get?foo=bar`)
 POST(`${host}/post`, 'Accept: application/vnd.xxx.v2+json', { foo: { bar: 'baz' }})
 
 // expect status code
-expect(200, GET(`${host}/status/400`))
+expect(200, GET(`${host}/status/400`).statusCode)

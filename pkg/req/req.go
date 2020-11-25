@@ -38,16 +38,16 @@ func printres(res *Response, err error) {
 	fmt.Println(res)
 }
 
-func httpGet(host string, args ...interface{}) int {
+func httpGet(host string, args ...interface{}) interface{} {
 	res, err := httpreq(http.MethodGet, host, args...)
 	printres(res, err)
-	return res.StatusCode
+	return res.Map()
 }
 
-func httpPost(host string, args ...interface{}) int {
+func httpPost(host string, args ...interface{}) interface{} {
 	res, err := httpreq(http.MethodPost, host, args...)
 	printres(res, err)
-	return res.StatusCode
+	return res.Map()
 }
 
 func httpreq(method string, host string, args ...interface{}) (*Response, error) {
