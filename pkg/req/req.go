@@ -34,14 +34,16 @@ func printres(host string, status int, body string, err error) {
 	fmt.Printf("\n[%d] %s\n%s\n", status, host, body)
 }
 
-func httpGet(host string, args ...interface{}) {
+func httpGet(host string, args ...interface{}) int {
 	status, body, err := httpreq(http.MethodGet, host, args...)
 	printres(host, status, body, err)
+	return status
 }
 
-func httpPost(host string, args ...interface{}) {
+func httpPost(host string, args ...interface{}) int {
 	status, body, err := httpreq(http.MethodPost, host, args...)
 	printres(host, status, body, err)
+	return status
 }
 
 func setHeader(args ...interface{}) {
