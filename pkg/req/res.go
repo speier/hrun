@@ -25,8 +25,8 @@ type Response struct {
 
 func (r *Response) String() string {
 	sb := &strings.Builder{}
-	fmt.Fprintf(sb, "\n[%d] %s\n", r.StatusCode, r.Host)
-	fmt.Fprintf(sb, "%s\n", r.Body)
+	fmt.Fprintf(sb, "[%d] %s\n", r.StatusCode, r.Host)
+	fmt.Fprintf(sb, "%s", r.Body)
 	return sb.String()
 }
 

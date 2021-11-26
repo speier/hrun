@@ -26,7 +26,7 @@ POST(`${host}/post`, 'Accept: application/vnd.foobar.v2+json', { payload: { data
 Run the script:
 
 ```sh
-$ hrun -f examples/basic.js
+$ hrun examples/basic.js
 ```
 
 ## API
