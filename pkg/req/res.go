@@ -23,10 +23,12 @@ type Response struct {
 	Trailer          http.Header `json:"trailer"`
 }
 
-func (r *Response) String() string {
+func (r *Response) String(logResponseBody bool) string {
 	sb := &strings.Builder{}
-	fmt.Fprintf(sb, "[%d] %s\n", r.StatusCode, r.Host)
-	fmt.Fprintf(sb, "%s", r.Body)
+	fmt.Fprintf(sb, "[%d] %s", r.StatusCode, r.Host)
+	if len(r.Body) > 0 && logResponseBody {
+		fmt.Fprintf(sb, "\n%s", r.Body)
+	}
 	return sb.String()
 }
 

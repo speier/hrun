@@ -8,18 +8,23 @@ import (
 	"io/ioutil"
 	"mime/multipart"
 	"net/http"
+	"net/url"
 	"os"
 	"strings"
 )
 
 var (
-	header  = http.Header{}
-	cookies = []*http.Cookie{}
+	header          = http.Header{}
+	cookies         = []*http.Cookie{}
+	logResponseBody = true
+	followRedirect  = true
 
 	Methods = map[string]interface{}{
-		"header": setHeader,
-		"GET":    httpGet,
-		"POST":   httpPost,
+		"header":          setHeader,
+		"GET":             httpGet,
+		"POST":            httpPost,
+		"logResponseBody": setLogResponseBody,
+		"followRedirect":  setFollowRedirect,
 	}
 )
 
@@ -30,12 +35,20 @@ func init() {
 	header.Set("Content-Type", "application/json")
 }
 
+func setLogResponseBody(b bool) {
+	logResponseBody = b
+}
+
+func setFollowRedirect(b bool) {
+	followRedirect = b
+}
+
 func printres(res *Response, err error) {
 	if err != nil {
 		fmt.Println(err.Error())
 		return
 	}
-	fmt.Println(res)
+	fmt.Println(res.String(logResponseBody))
 }
 
 func httpGet(host string, args ...interface{}) interface{} {
@@ -58,7 +71,18 @@ func httpreq(method string, host string, args ...interface{}) (*Response, error)
 		return nil, err
 	}
 
-	req, err := http.NewRequest(method, host, payload)
+	u, err := url.Parse(host)
+	if err != nil {
+		if err != nil {
+			return nil, err
+		}
+	}
+
+	if len(u.Scheme) == 0 {
+		u.Scheme = "https"
+	}
+
+	req, err := http.NewRequest(method, u.String(), payload)
 	if err != nil {
 		return nil, err
 	}
@@ -70,6 +94,13 @@ func httpreq(method string, host string, args ...interface{}) (*Response, error)
 	}
 
 	client := &http.Client{}
+
+	if !followRedirect {
+		client.CheckRedirect = func(req *http.Request, via []*http.Request) error {
+			return http.ErrUseLastResponse
+		}
+	}
+
 	res, err := client.Do(req)
 	if err != nil {
 		return nil, err
@@ -88,7 +119,7 @@ func httpreq(method string, host string, args ...interface{}) (*Response, error)
 	}
 
 	return &Response{
-		Host:             host,
+		Host:             u.String(),
 		Status:           res.Status,
 		StatusCode:       res.StatusCode,
 		Proto:            res.Proto,

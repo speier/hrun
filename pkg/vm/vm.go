@@ -28,9 +28,11 @@ func NewInterpreter(globals map[string]interface{}) VM {
 		"log": fmt.Println,
 	})
 	runtime.Set("expect", func(a, b interface{}) {
+		prefix := "OK"
 		if a != b {
-			fmt.Printf("[ERR] expected %v got %v\n", a, b)
+			prefix = "ERR"
 		}
+		fmt.Printf("[%s] expected %v got %v\n", prefix, a, b)
 	})
 
 	if globals != nil {
