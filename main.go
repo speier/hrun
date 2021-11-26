@@ -38,6 +38,8 @@ func main() {
 	// check if file exists
 	filename := flag.Arg(0)
 	if _, err := os.Stat(filename); errors.Is(err, os.ErrNotExist) {
+		fmt.Fprintf(os.Stderr, "Error: file not found '%s'\n", filename)
+		fmt.Println()
 		flag.Usage()
 		os.Exit(0)
 	}

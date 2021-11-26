@@ -24,7 +24,7 @@ func VMEnv(envargs []string) map[string]interface{} {
 	// 1) load default `.env` file to os.env
 	godotenv.Load()
 
-	// 2) try to load files if arg is a file to os.env
+	// 2) try to load file(s) to os.env, if arg is a file
 	for _, e := range envargs {
 		godotenv.Load(e)
 	}
@@ -32,16 +32,19 @@ func VMEnv(envargs []string) map[string]interface{} {
 	// 3) append rest of the args if valid key=value to os env
 	envargs = append(os.Environ(), envargs...)
 	for _, e := range envargs {
-		k, v := stringkv(e, "=")
-		env[k] = v
+		k, v, ok := stringkv(e, "=")
+		if ok {
+			env[k] = v
+		}
 	}
 
 	return env
 }
 
-func stringkv(s string, sep string) (k, v string) {
+func stringkv(s string, sep string) (k string, v string, ok bool) {
 	a := strings.Split(s, sep)
-	if len(a) == 2 {
+	ok = len(a) == 2
+	if ok {
 		k, v = a[0], a[1]
 	}
 	return
